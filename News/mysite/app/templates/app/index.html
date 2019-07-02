@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>搜索引擎</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+		{% load staticfiles %}
+		<style type="text/css">
+    	<!--
+	        body {background-image:url(/static/app/black.jpg);
+
+	        background-repeat:no-repeat;background-attachment:fixed;background-position:50% 50%}
+
+	        h2
+	        {
+	            font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+	            font-size:60px;
+	            color:white;
+	            background-color:#FF7F50;
+	        }
+	        h2.pos_abs
+	        {
+		        position:absolute;
+		        left:350px;
+		        top:200px;
+	        }
+	        #logo
+	        {
+	        	margin-top: 10px;
+	        }
+		    input.pos_abs
+		    {
+		        position:relative;
+		        left:200px;
+		        top:0px;
+		        width:800px;
+		        height:40px;
+		        background-color:#FFF5EE;
+		        border-radius:10px;
+		    }
+		    #table
+		    {
+		    	background-color: #FFFFFF
+		    }
+    	-->
+    	</style>
+	</head>
+	<body>
+		<div id = 'logo'><img src ="{% static 'app/logo.png' %}"></img></div>
+		<div class="container" style="width:100%">
+			<form class="form" role="form" action="{% url 'app:search' %}" method="get">
+				<br>
+				<br>
+				<input type="text" class="pos_abs" name="text" id="name" placeholder="请输入搜索内容">
+				<br>
+				<button type="submit" style="background-color:#FFF5EE;width:30%;margin-left: 400px;margin-top: 40px;border-radius:10px" class="btn btn-default">搜索</button>
+			</form>
+		</div>
+		<div>
+			<label style="width:2%;margin-top: 50px" id="label"></label>
+			<label><font size="3" color="white">共有{{ num }}条新闻，当前位于第{{ contacts.number }}页，共有{{ contacts.paginator.num_pages }}页。</font></label>
+			<table border="0" style="background-color:#FFF5EE;width: 80%;margin-left: 100px;border-radius:10px" id="table">
+				<ul>
+					{% for article in contacts %}
+					<tr><td><font face="Microsoft YaHei" size="2.7">
+						<a href="{% url 'app:jump' article.id %}" >{{ article.title|safe }}</a>
+				</font></td><td><p>{{"    "}}</p></td><td><font face="Microsoft JhengHei" size = "2">{{ article.text|safe }}</font></td><td><font face="Microsoft YaHei" size = "2">{{ article.time|safe }}</font></td></tr>
+	        		<tr><td><p>{{" "}}</p></td><td><p>{{"    "}}</p></td><td><p>{{" "}}</p></td></tr>
+	        		<tr><td><p>{{" "}}</p></td><td><p>{{"    "}}</p></td><td><p>{{" "}}</p></td></tr>
+	        		{% endfor %}
+				</ul>
+			</table>
+		</div>
+		<div class="row">
+				<br>
+    			<!span class="step-links">
+					<label style="width:12%"></label>
+					<label style="width:33%">
+        			{% if contacts.has_previous %}
+            			<a href="?page={{ contacts.previous_page_number }}">previous</a>
+	        		{% endif %}
+					</label>
+					<label style="width:33%">
+    	    		<span class="current">
+        	    		<font size="3" color="white">Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.</font>
+        			</span>
+					</label>
+					<label style="width:18%">
+	        		{% if contacts.has_next %}
+    	        		<a href="?page={{ contacts.next_page_number }}">next</a>
+        			{% endif %}
+					</label>
+    			<!/span>
+			</div>
+	</body>
+</html>

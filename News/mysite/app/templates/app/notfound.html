@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>搜索引擎</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+	</head>
+	<body>
+		<div class="container" style="width:60%">
+			<form class="form" role="form" action="{% url 'app:search' %}" method="get">
+				<br>
+				<br>
+				<input type="text" class="form-control" name="text" style="width:100%" id="name" placeholder="请输入搜索内容">
+				<br>
+				<label style="width:2%"></label>
+				<label class="radio-inline" style="width:19%">
+  					<input type="radio" name="select" id="inlineRadio1" checked="checked" value="all">全部
+				</label>
+				<label class="radio-inline" style="width:19%">
+  					<input type="radio" name="select" id="inlineRadio2" value="year">一年内
+				</label>
+				<label class="radio-inline" style="width:19%">
+  					<input type="radio" name="select" id="inlineRadio3" value="month">一月内
+				</label>
+				<label class="radio-inline" style="width:19%">
+  					<input type="radio" name="select" id="inlineRadio4" value="week">一周内
+				</label>
+				<button type="submit" style="width:15%" class="btn btn-default">搜索</button>
+			</form>
+			<div class="row">
+				<br>
+				<label style="width:2%"></label>
+				<label>没有查询到结果。</label>
+			</div>
+		</div>
+	</body>
+</html>

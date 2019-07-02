@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <title>搜索引擎</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+        {% load staticfiles %}
+        <style type="text/css">
+        <!--
+            body {background-image:url(/static/app/black.jpg);
+
+            background-repeat:no-repeat;background-attachment:fixed;background-position:50% 50%}
+
+            h2
+            {
+                font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+                font-size:60px;
+                color:white;
+                background-color:#FF7F50;
+            }
+            h2.pos_abs
+            {
+                position:absolute;
+                left:350px;
+                top:200px;
+            }
+            #logo
+            {
+                margin-top: 10px;
+            }
+            input.pos_abs
+            {
+                position:relative;
+                left:200px;
+                top:0px;
+                width:800px;
+                height:40px;
+                background-color:#FFF5EE;
+                border-radius:10px;
+            }
+            #table
+            {
+                background-color: #FFFFFF
+            }
+        -->
+        </style>
+    </head>
+    <body>
+        <div id = 'logo'><img src ="{% static 'app/logo.png' %}"></img></div>
+        <div class="container" style="width:100%">
+            <table border="0" style="width: 80%;position:relative;margin-top:20px;margin-left: 100px;background-color:#FFF5EE;border-radius:10px" id="table">
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><font face="Microsoft YaHei" size="4" style="font-weight:bold"><p style="text-align:center">{{ title|safe }}</p></font></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><font face="Microsoft JhengHei" size = "2"><p style="text-align:right">{{time|safe}}</p></font></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><font face="Microsoft JhengHei" size = "2"><p>{{text|safe}}</p></font></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+            </table>
+            <table border="0" style="width: 80%;position:relative;margin-top:20px;margin-left: 100px;border-radius:10px;background-color:#FFF5EE"id="table">
+                <tr><td><font face="Microsoft YaHei" size="4" style="font-weight:bold" color="#FF7F50"><p>{{"新闻推荐"}}</p></font></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2.7" >
+                        <a href="{% url 'app:jump' article1.article_id %}" >{{ article1.article_title|safe }}</a>
+                        </font></p></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2" >{{text1|safe}}</font></p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2.7" >
+                        <a href="{% url 'app:jump' article2.article_id %}" >{{ article2.article_title|safe }}</a>
+                        </font></p></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2" >{{text2|safe}}</font></p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2.7" >
+                        <a href="{% url 'app:jump' article3.article_id %}" >{{ article3.article_title|safe }}</a>
+                        </font></p></td></tr>
+                <tr><td><p><font face="Microsoft YaHei" size="2" >{{text3|safe}}</font></p></td></tr>
+                <tr><td><p>{{" "}}</p></td></tr>
+            </table>
+        </div>
+    </body>
+</html>

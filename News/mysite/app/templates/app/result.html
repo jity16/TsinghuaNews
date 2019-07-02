@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>搜索引擎</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+		<style type="text/css">
+    	<!--
+	        body {background-image:url(/static/app/background.jpg);
+	    -->
+    	</style>
+	</head>
+	<body>
+		<div class="container" style="width:80%;background: #F0FFFF">
+			<form class="form" role="form" action="{% url 'app:search' %}" method="get">
+				<br>
+				<br>
+				<input type="text" class="form-control" name="text" style="width:100%;border-radius:10px" id="name" value="{{ text }}">
+				<br>
+				<label style="width:2%"></label>
+				<label class="radio-inline" style="width:19%">
+					{% if all %}
+  					<input type="radio" name="select" id="inlineRadio1" checked="checked" value="all">
+					{% else %}
+					<input type="radio" name="select" id="inlineRadio1" value="all">
+					{% endif %}
+					全部
+				</label>
+				<label class="radio-inline" style="width:19%">
+					{% if year %}
+  					<input type="radio" name="select" id="inlineRadio2" checked="checked" value="year">
+					{% else %}
+					<input type="radio" name="select" id="inlineRadio2" value="year">
+					{% endif %}
+					一年内
+				</label>
+				<label class="radio-inline" style="width:19%">
+					{% if month %}
+  					<input type="radio" name="select" id="inlineRadio3" checked="checked" value="month">
+					{% else %}
+					<input type="radio" name="select" id="inlineRadio3" value="month">
+					{% endif %}
+					一月内
+				</label>
+				<label class="radio-inline" style="width:19%">
+					{% if week %}
+  					<input type="radio" name="select" id="inlineRadio4" checked="checked" value="week">
+					{% else %}
+					<input type="radio" name="select" id="inlineRadio4" value="week">
+					{% endif %}
+					一周内
+				</label>
+				<button type="submit" style="width:15%;border-radius:10px" class="btn btn-default" >搜索</button>
+			</form>
+			<div class="row">
+				<br>
+				<table>
+				<label style="width:2%"></label>
+				<tr><td><label><font size="2" color="#4682B4">本次查询耗时{{ time }}秒</font></label></td></tr>
+				<tr><td><p>{{"   "}}</p></td></tr>
+				<tr><td><label><font size="3">共有{{ num }}条结果，当前位于第{{ contacts.number }}页，共有{{ contacts.paginator.num_pages }}页。</font></label></td></tr>
+				</table>
+				<br>
+				<br>
+			</div>
+			<div>
+				<ul>
+					{% for article in contacts %}
+    				<li>
+						<p><font face="Microsoft YaHei" size="2.7">
+						<a href="{% url 'app:jump' article.id %}" >{{ article.title|safe }}</a>
+						</font></p>
+	        			<p><font face = "Microsoft JhengHei" size="2">{{ article.text|safe }}</font></p>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="row">
+				<br>
+    			<!span class="step-links">
+					<label style="width:12%"></label>
+					<label style="width:33%">
+        			{% if contacts.has_previous %}
+            			<a href="?page={{ contacts.previous_page_number }}">previous</a>
+	        		{% endif %}
+					</label>
+					<label style="width:33%">
+    	    		<span class="current"><font size="3">
+        	    		Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        	    	</font>
+        			</span>
+					</label>
+					<label style="width:18%">
+	        		{% if contacts.has_next %}
+    	        		<a href="?page={{ contacts.next_page_number }}">next</a>
+        			{% endif %}
+					</label>
+    			<!/span>
+			</div>
+			<br>
+			<br>
+		</div>
+	</body>
+</html>
